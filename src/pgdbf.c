@@ -739,7 +739,11 @@ int main(int argc, char **argv) {
                     break;
                 case 'I':
                     /* Integers */
-                    printf("%d", slittleint32_t(bufoffset));
+					if(bufoffset[0] == '*') {
+                        printf("\\N");
+					} else {
+                    	printf("%d", slittleint32_t(bufoffset));
+					}
                     break;
                 case 'L':
                     /* Booleans */
@@ -793,7 +797,8 @@ int main(int argc, char **argv) {
                     while(*s == ' ') {
                         s++;
                     }
-                    if(*s == '\0') {
+					/* If *s == '\0' or *s == '*' */
+                    if(*s == '\0' || *s == '*') {
                         printf("\\N");
                     } else {
                         printf("%s", s);
