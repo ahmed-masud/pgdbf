@@ -637,7 +637,7 @@ int main(int argc, char **argv) {
             if(optusecreatetable) {
                 if(optnumericasnumeric) {
                     if(fields[fieldnum].decimals > 0) {
-                        printf("NUMERIC(%d, %d)", fields[fieldnum].length, fields[fieldnum].decimals);
+                        printf("NUMERIC(%d, %d)", fields[fieldnum].length + 1, fields[fieldnum].decimals);
                     } else {
                         printf("NUMERIC(%d)", fields[fieldnum].length);
                     }
