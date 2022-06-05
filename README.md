@@ -76,7 +76,7 @@ Note that the entire process is usually wrapped inside a transaction so that oth
 ## Command Line
 
 ```
-Usage: pgdbf [-cCdDeEhnNpPqQtTuU] [-s encoding] [-m memofilename] [-i fieldname1,fieldname2,fieldnameN] filename [indexcolumn ...]
+Usage: pgdbf [-cCdDeEhnNpPqQtTuU] [-s encoding] [-m memofilename] [-i fieldname1,fieldname2,fieldnameN] [-o tablename] filename [indexcolumn ...]
 ```
 
 The only required argument is the filename of the table to be converted.  If the table has a memo field, then use the "-m" option to specify the path to the memo file.
@@ -103,6 +103,8 @@ The "‐n" flag creates NUMERIC fields with type NUMERIC. **This is a new defaul
 
 The "‐N" flag creates NUMERIC fields with type TEXT. This is the historical default setting. Use this if rows contain invalid number data in NUMERIC fields, which  are  essentially CHARACTER fields behind the scenes, and you receive errors when importing the data into PostgreSQL.
 
+The "-o" flag uses the user-defined table name.
+ 
 The "‐p" argument shows a progress bar during the conversion process.
 
 The default "-P" argument hides the progress bar.
