@@ -574,16 +574,15 @@ int main(int argc, char **argv) {
             /* If the fieldname is a reserved word, rename it to start with
              * "tablename_" */
             isreservedname = 0;
-            /* Removed for now 
-			 *
-			 *
 			for(i = 0; RESERVEDWORDS[i]; i++ ) {
                 if(!strcmp(fieldnames[fieldnum], RESERVEDWORDS[i])) {
-                    printf("%s_%s ", tablename, fieldnames[fieldnum]);
+                    //printf("%s_%s ", tablename, fieldnames[fieldnum]);
+                    // REMOVED FOR NOW
+					printf("%s ", fieldnames[fieldnum]);
                     isreservedname = 1;
                     break;
                 }
-            }*/
+            }
             if(!isreservedname) printf("%s ", fieldnames[fieldnum]);
         }
 
