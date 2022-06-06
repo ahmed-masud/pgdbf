@@ -637,10 +637,18 @@ int main(int argc, char **argv) {
             if(optusecreatetable) {
                 if(optnumericasnumeric) {
                     if(fields[fieldnum].decimals > 0) {
-                        printf("NUMERIC(%d, %d)", fields[fieldnum].length + 1, fields[fieldnum].decimals);
+                        printf("NUMERIC(%d, %d)", fields[fieldnum].length, fields[fieldnum].decimals);
                     } else {
-                        printf("NUMERIC(%d)", fields[fieldnum].length);
-                    }
+                        //printf("NUMERIC(%d)", fields[fieldnum].length);
+                    	if(fields[fieldnum].length < 5)
+                                printf("SMALLINT");
+                        else if(fields[fieldnum].length < 10)
+                            printf("INTEGER");
+                        else if(fields[fieldnum].length < 19)
+                                printf("BIGINT");
+                        else
+                            printf("NUMERIC(%d)", fields[fieldnum].length);
+					}
                 } else {
                     printf("TEXT");
                 }
