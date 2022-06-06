@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
     char *t;
     char *u;
 	char *exp;
-	double  d;
+	double  *dub;
     int     lastcharwasreplaced = 0;
     int     printedfieldcount;
     int     cnt = 1;
@@ -600,7 +600,7 @@ int main(int argc, char **argv) {
         case 'V':
         case 'W':
             if(optusecreatetable) {
-				while(strcmp(fieldnames[fieldnum], "guid")) {
+				if(strcmp(fieldnames[fieldnum], "guid") == 0) {
 					printf("uuid");
 					break;
 				}
@@ -843,8 +843,8 @@ int main(int argc, char **argv) {
 					exp = strchr(s, '+');
 					if (exp != NULL) {
 						// Convert to double, before printing as a float with 0 decimal places
-						d = atof(s);
-						printf("%.0f",d);
+						*dub = atof(s);
+						printf("%.0f",*dub);
 						break;
 					}
 					// NEW CODE
