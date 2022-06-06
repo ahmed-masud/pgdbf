@@ -830,7 +830,7 @@ int main(int argc, char **argv) {
 					char *e = strchr(s, '+');
 					if (e != NULL) {
 						double d = atof(s);
-						printf("%f",d);
+						printf("%s",d);
 						break;
 					}
 					// NEW CODE
