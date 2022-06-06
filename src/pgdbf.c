@@ -75,8 +75,6 @@ int main(int argc, char **argv) {
     char *s;
     char *t;
     char *u;
-	char *exp;
-	double  *dub;
     int     lastcharwasreplaced = 0;
     int     printedfieldcount;
     int     cnt = 1;
@@ -839,11 +837,11 @@ int main(int argc, char **argv) {
 					// NEW CODE
 
 					// If s contains '+', it is in scientific notation, eg. 2.2E+8
-					exp = strchr(s, '+');
-					if (exp != NULL) {
+					char *e = strchr(s, '+');
+					if (e != NULL) {
 						// Convert to double, before printing as a float with 0 decimal places
-						*dub = atof(s);
-						printf("%.0f",*dub);
+						double d = atof(s);
+						printf("%.0f",d);
 						break;
 					}
 					// NEW CODE
