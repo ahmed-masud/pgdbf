@@ -75,6 +75,8 @@ int main(int argc, char **argv) {
     char *s;
     char *t;
     char *u;
+	char *exp;
+	double  d;
     int     lastcharwasreplaced = 0;
     int     printedfieldcount;
     int     cnt = 1;
@@ -572,13 +574,16 @@ int main(int argc, char **argv) {
             /* If the fieldname is a reserved word, rename it to start with
              * "tablename_" */
             isreservedname = 0;
-            for(i = 0; RESERVEDWORDS[i]; i++ ) {
+            /* Removed for now 
+			 *
+			 *
+			for(i = 0; RESERVEDWORDS[i]; i++ ) {
                 if(!strcmp(fieldnames[fieldnum], RESERVEDWORDS[i])) {
                     printf("%s_%s ", tablename, fieldnames[fieldnum]);
                     isreservedname = 1;
                     break;
                 }
-            }
+            }*/
             if(!isreservedname) printf("%s ", fieldnames[fieldnum]);
         }
 
@@ -594,8 +599,14 @@ int main(int argc, char **argv) {
         case 'C':
         case 'V':
         case 'W':
-            if(optusecreatetable) printf("VARCHAR(%d)", fields[fieldnum].length);
-            break;
+            if(optusecreatetable) {
+				while(strcmp(fieldnames[fieldnum], "guid")) {
+					printf("uuid");
+					break;
+				}
+				printf("VARCHAR(%d)", fields[fieldnum].length);
+			}
+			break;
         case 'D':
             if(optusecreatetable) printf("DATE");
             break;
@@ -639,7 +650,8 @@ int main(int argc, char **argv) {
                     if(fields[fieldnum].decimals > 0) {
                         printf("NUMERIC(%d, %d)", fields[fieldnum].length, fields[fieldnum].decimals);
                     } else {
-                        //printf("NUMERIC(%d)", fields[fieldnum].length);
+
+						/* Patch to optimize non-decimal numeric fields */
                     	if(fields[fieldnum].length < 5)
                                 printf("SMALLINT");
                         else if(fields[fieldnum].length < 10)
@@ -655,7 +667,8 @@ int main(int argc, char **argv) {
             }
             break;
         case 'T':
-            if(optusecreatetable) printf("TIMESTAMP");
+			/* Set precision to 1sec to match foxpro standards */
+            if(optusecreatetable) printf("TIMESTAMP(0)");
             break;
         case 'Y':
             if(optusecreatetable) printf("DECIMAL(20,4)");
@@ -827,9 +840,10 @@ int main(int argc, char **argv) {
 					// NEW CODE
 
 					// If s contains '+', it is in scientific notation, eg. 2.2E+8
-					char *e = strchr(s, '+');
-					if (e != NULL) {
-						double d = atof(s);
+					exp = strchr(s, '+');
+					if (exp != NULL) {
+						// Convert to double, before printing as a float with 0 decimal places
+						d = atof(s);
 						printf("%.0f",d);
 						break;
 					}
