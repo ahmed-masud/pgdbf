@@ -823,6 +823,18 @@ int main(int argc, char **argv) {
                     while(*s == ' ') {
                         s++;
                     }
+
+					// NEW CODE
+
+					// If s contains '+', it is in scientific notation, eg. 2.2E+8
+					char *e = strchr(s, '+');
+					if (e != NULL) {
+						double d = atof(s);
+						printf("%f",d);
+						break;
+					}
+					// NEW CODE
+
 					/* If *s == '\0' or *s == '*' */
                     if(*s == '\0' || *s == '*') {
                         printf("\\N");
