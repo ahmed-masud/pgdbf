@@ -743,6 +743,7 @@ int main(int argc, char **argv) {
                     break;
                 case 'C':
                 case 'W':
+				case 'V':
                     /* Varchars */
                     safeprintbuf(bufoffset, fields[fieldnum].length, opttrimpadding);
                     break;
